@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo" class="bg-gray-900">
+    <ActionBar title="Live Stream" class="bg-purple-700 text-white">
+        <ActionItem tap="{{ startStream }}" ios.position="right" android.position="actionBar"
+            visibility="{{ !isStreaming ? 'visible' : 'collapsed' }}">
+            <Label text="Start" class="text-white p-2"/>
+        </ActionItem>
+        <ActionItem tap="{{ stopStream }}" ios.position="right" android.position="actionBar"
+            visibility="{{ isStreaming ? 'visible' : 'collapsed' }}">
+            <Label text="Stop" class="text-white p-2"/>
+        </ActionItem>
+    </ActionBar>
+
+    <GridLayout rows="*, auto" columns="*, auto">
+        <!-- Preview Area -->
+        <ContentView row="0" col="0" colSpan="2" class="bg-black">
+            <Label text="Camera Preview" class="text-white text-center"/>
+        </ContentView>
+
+        <!-- Stream Health Indicator -->
+        <StackLayout row="0" col="1" class="bg-black bg-opacity-50 p-2">
+            <Label text="{{ 'Health: ' + streamHealth + '%' }}" 
+                   class="text-sm" 
+                   color="{{ streamHealth > 70 ? 'green' : streamHealth > 30 ? 'yellow' : 'red' }}"/>
+        </StackLayout>
+
+        <!-- Controls Panel -->
+        <GridLayout row="1" col="0" colSpan="2" rows="auto, auto" columns="*, *" class="bg-gray-800 p-4">
+            <!-- Audio Controls -->
+            <StackLayout row="0" col="0" class="p-2">
+                <Label text="Mic Volume" class="text-white"/>
+                <Slider value="{{ audioSettings.micVolume }}" minValue="0" maxValue="1" class="w-full"/>
+            </StackLayout>
+            <StackLayout row="0" col="1" class="p-2">
+                <Label text="App Volume" class="text-white"/>
+                <Slider value="{{ audioSettings.appVolume }}" minValue="0" maxValue="1" class="w-full"/>
+            </StackLayout>
+
+            <!-- Stream Settings -->
+            <GridLayout row="1" col="0" colSpan="2" columns="*, *, *" class="mt-2">
+                <Button text="Settings" tap="{{ showSettings }}" class="-primary m-1" col="0"/>
+                <Button text="Overlays" tap="{{ showOverlays }}" class="-primary m-1" col="1"/>
+                <Button text="Chat" tap="{{ showChat }}" class="-primary m-1" col="2"/>
+            </GridLayout>
+        </GridLayout>
+    </GridLayout>
+</Page>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo">
+    <ActionBar title="Stream Studio" class="bg-purple-700 text-white"/>
+    
+    <StackLayout class="p-4">
+        <Button text="Start Streaming" tap="{{ navigateToStream }}" class="btn btn-primary mb-4"/>
+        
+        <Label text="Recent Streams" class="text-lg font-bold mb-2"/>
+        <ListView items="{{ recentStreams }}" class="list-group">
+            <ListView.itemTemplate>
+                <StackLayout class="list-group-item">
+                    <Label text="{{ title }}" class="font-bold"/>
+                    <Label text="{{ date }}" class="text-sm text-gray-500"/>
+                </StackLayout>
+            </ListView.itemTemplate>
+        </ListView>
+    </StackLayout>
+</Page>
